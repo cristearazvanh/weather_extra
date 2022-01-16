@@ -21,8 +21,8 @@ WeatherProvider.register("openweathermap", {
 		weatherEndpoint: "/onecall",
 		locationID: false,
 		location: false,
-		lat: config.latitude,
-		lon: config.longitude,
+		lat: "",
+		lon: "",
 		apiKey: ""
 	},
 
