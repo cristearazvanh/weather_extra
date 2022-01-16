@@ -1,0 +1,54 @@
+{% if hourly %}
+    {% set numSteps = hourly | calcNumEntries %}
+    {% set currentStep = 0 %}
+    <table class="{{ config.tableClass }} hourly">
+        {% set hours = hourly.slice(0, numSteps) %}
+        {% for hour in hours %}
+            <tr {% if config.colored %}class="colored"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
+                <td class="day">{{ hour.date | formatTime }}</td>
+                <td class="bright weather-icon"><span class="wi weathericon wi-{{ hour.weatherType }}"></span></td>
+                <td class="align-right normal day-temp lime">
+                    {{ hour.temperature | roundValue | unit("temperature") | decimalSymbol }}
+                </td>
+                <td class="align-right feeLike gold">
+                    {{ hour.feelsLikeTemp | roundValue | unit("temperature") | decimalSymbol }}
+                </td>
+                {% if config.showPrecipitationAmount %}
+                    {% if hour.precipitationUnits %}	
+                        <td class="align-right bright precipitation">
+                            {{ hour.precipitation }}{{ hour.precipitationUnits }}
+                        </td>			
+		    		{% else %}
+                        <td class="align-right bright precipitation">
+                            {{ hour.precipitation }} <i class="fa fa-tint prep skyblue"></i>
+                        </td>
+                    {% endif %}
+                {% endif %}
+            </tr>
+            {% if config.extra %}
+                <tr {% if config.colored %}class="colored"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
+                    <td class="align-right humidity skyblue">
+                        {{ hour.humidity | roundValue }}%
+                    </td>
+                    <td class="align-right dewpoint cyan">
+                        {{ hour.dew | roundValue | unit("temperature") | decimalSymbol }}
+                    </td>
+                    <td class="align-right pressure gold">
+                        {{ hour.pressure }}Hg
+                    </td>
+                    <td class="align-right uvi lightgreen">uv
+                        {{ hour.uvi | roundValue | decimalSymbol }}
+                    </td>
+                    <td class="align-right visibility violet">
+                        {{ hour.visibility | decimalSymbol }}Km
+                    </td>
+                </tr>
+            {% endif %}
+            {% set currentStep = currentStep + 1 %}
+        {% endfor %}
+    </table>
+{% else %}
+    <div class="dimmed light small">
+        {{ "LOADING" | translate }}
+    </div>
+{% endif %}
