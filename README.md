@@ -4,7 +4,7 @@ Default Weather module (left) vs Onecall module (right) with same design https:/
 
 <img src=https://github.com/hangorazvan/weather/blob/master/weather_vs_onecall.png>
 
-#### Current weather
+#### Current weather (onecall)
 
 - humidity
 - sunrise
@@ -24,7 +24,7 @@ plus
 - description
 - alerts
 
-#### Weather forecast (hourly and daily)
+#### Weather forecast (hourly and daily onecall)
 
 - date
 - maxTemperature
