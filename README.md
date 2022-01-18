@@ -1,7 +1,10 @@
 # MagicMirror² Weather Module with OpenWeatherMap OneCall enhancements and extra data
 
-#### Current weather
+Default Weather module (left) vs Onecall module (right) with same design https://github.com/hangorazvan/onecall
 
+<img src=https://github.com/hangorazvan/weather/blob/master/weather_vs_onecall.png>
+
+#### Current weather
 
 - humidity
 - sunrise
@@ -19,6 +22,7 @@ plus
 - mmHg pressure
 - visibility
 - description
+- alerts
 
 #### Weather forecast (hourly and daily)
 
