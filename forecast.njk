@@ -1,7 +1,7 @@
 {% if forecast %}
     {% set numSteps = forecast | calcNumSteps %}
     {% set currentStep = 0 %}
-    <table class="{{ config.tableClass }} daily">
+    <table class="{{ config.tableClass }} daily weatherforecast">
         {% if config.ignoreToday %}
             {% set forecast = forecast.splice(1) %}
         {% endif %}
@@ -9,50 +9,56 @@
         {% for f in forecast %}
             <tr {% if config.colored %}class="colored"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
                 {% if (currentStep == 0) and config.ignoreToday == false and config.absoluteDates == false %}
-                    <td class="day">{{ "TODAY" | translate }}</td>
-                {% elif (currentStep == 1) and config.ignoreToday == false and config.absoluteDates == false %}
-                    <td class="day">{{ "TOMORROW" | translate }}</td>
+                    <td class="align-left day">{{ "TODAY" | translate }}</td>
+                {% elif (currentStep == 1) and config.ignoreToday == false and config.absoluteDates == false and not config.extra %}
+                    <td class="align-left day">{{ "TOMORROW" | translate }}</td>
                 {% else %}
-                    <td class="day">{{ f.date.format('ddd') }}</td>
+                    <td class="align-left day">{{ f.date.format('ddd') }}</td>
                 {% endif %}
-                <td class="bright weather-icon"><span class="wi weathericon wi-{{ f.weatherType }}"></span></td>
-                <td class="align-right max-temp coral">
+                <td class="align-center bright weather-icon"><span class="wi weathericon wi-{{ f.weatherType }}"></span></td>
+                <td class="align-center max-temp coral">
                     {{ f.maxTemperature | roundValue | unit("temperature") | decimalSymbol }}
                 </td>
-                <td class="align-right min-temp skyblue">
+                <td class="align-center min-temp skyblue">
                     {{ f.minTemperature | roundValue | unit("temperature") | decimalSymbol }}
                 </td>
                 {% if config.showPrecipitationAmount %}
-                    {% if f.precipitationUnits %}
+                    {% if f.precipitation %}
                         <td class="align-right bright precipitation">
-                            {{ f.precipitation }}{{ f.precipitationUnits }} <i class="wi wi-umbrella skyblue">
+                            {% if f.rain %}
+                                {{ f.rain | roundValue | decimalSymbol }} mm <i class="wi wi-umbrella lime"></i>
+                            {% elif f.snow %}
+                                {{ f.snow | roundValue | decimalSymbol }} mm <i class="wi wi-snowflake-cold lightblue"></i>
+                            {% elif f.rain and f.snow %}
+                                {{ f.precipitation | roundValue | decimalSymbol }} mm <i class="wi wi-umbrella lime"></i>
+                            {% endif %}
                         </td>
-                        {% else %}
-                        <td class="align-right bright precipitation">
-                            {{ f.precipitation }} <i class="fa fa-tint prep skyblue"></i>
+                    {% else %}
+                        <td class="align-right rain precipitation">
+                            {{ "No rain" | translate }} <i class="fa fa-tint-slash skyblue"></i>
                         </td>
                     {% endif %}
                 {% endif %}
             </tr>
-            <!--
-            <tr {% if config.colored %}class="colored"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
-                <td class="align-right feeLike gold">
-                    {{ hour.feelsLikeTemp | roundValue | unit("temperature") | decimalSymbol }}
-                </td>
-                <td class="align-right dewpoint lightgreen">
-                    {{ hour.dew | roundValue | unit("temperature") | decimalSymbol }}
-                </td>
-                <td class="align-right pressure gold">
-                    {{ hour.pressure }}
-                </td>
-                <td class="align-right uvi gold">
-                    {{ hour.uvi | roundValue | decimalSymbol }}
-                </td>
-                <td class="align-right uvi gold">
-                    &nbsp;
-                </td>
-            -->    
-            </tr>
+            {% if config.extra %}
+                <tr class="extra" {% if config.colored %}class="colored"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
+                    <td class="align-left humidity skyblue">
+                        <i class="wi wi-humidity little skyblue"></i> {{ f.humidity }}%
+                    </td>
+                    <td class="align-center dewpoint cyan">
+                        {{ f.dew | roundValue | unit("temperature") | decimalSymbol }}
+                    </td>
+                    <td class="align-center pressure gold">
+                        {{ f.pressure }} Hg
+                    </td>
+                    <td class="align-center uvi lightgreen">uv
+                        {{ f.uvi | roundValue | decimalSymbol }}
+                    </td>
+                    <td class="align-right feeLike yellow">
+                        Realfeel {{ f.feelsLikeTemp | unit("temperature") | decimalSymbol }}
+                    </td>
+                </tr>
+            {% endif %}
             {% set currentStep = currentStep + 1 %}
         {% endfor %}
     </table>

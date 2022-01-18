@@ -21,8 +21,8 @@ WeatherProvider.register("openweathermap", {
 		weatherEndpoint: "/onecall",
 		locationID: false,
 		location: false,
-		lat: "",
-		lon: "",
+		lat: config.latitude,
+		lon: config.longitude,
 		apiKey: ""
 	},
 
@@ -172,7 +172,7 @@ WeatherProvider.register("openweathermap", {
 			return this.fetchOnecall(data);
 		}
 		// if weatherEndpoint does not match onecall, what should be returned?
-		var weatherData = { current: new WeatherObject(this.config.units, this.config.tempUnits, this.config.windUnits, this.config.useKmh), hours: [], days: [] };
+		var weatherData = { current: new WeatherObject(this.config.units, this.config.tempUnits, this.config.windUnits, this.config.useKmh), hours: [], days: [], alerts: [] };
 		return weatherData;
 	},
 
@@ -355,9 +355,8 @@ WeatherProvider.register("openweathermap", {
 		if (data.hasOwnProperty("hourly")) {
 			for (var hour of data.hourly) {
 				weather.date = moment(hour.dt, "X").utcOffset(data.timezone_offset / 60);
-				// weather.date = moment(hour.dt, "X").utcOffset(data.timezone_offset/60).format(onecallDailyFormat+","+onecallHourlyFormat);
 				weather.temperature = hour.temp;
-				weather.feelsLikeTemp = hour.feels_like;
+				weather.feelsLikeTemp = parseFloat(hour.feels_like).toFixed(0);
 				weather.humidity = hour.humidity;
 				weather.windSpeed = hour.wind_speed;
 				weather.windDirection = hour.wind_deg;
@@ -404,7 +403,7 @@ WeatherProvider.register("openweathermap", {
 				weather.humidity = day.humidity;
 				weather.windSpeed = day.wind_speed;
 				weather.windDirection = day.wind_deg;
-				weather.feelsLikeTemp = day.feels_like.eve;
+				weather.feelsLikeTemp = parseFloat(day.feels_like.eve).toFixed(0);
 				weather.uvi = day.uvi;
 				weather.dew = day.dew_point;
 				weather.pressure = Math.round(day.pressure * 750.062 / 1000);
@@ -435,7 +434,15 @@ WeatherProvider.register("openweathermap", {
 			}
 		}
 
-		return { current: current, hours: hours, days: days };
+		// get alerts, if requested
+		var alerts = new WeatherObject();
+		if (data.hasOwnProperty("alerts")) {
+			current.start = moment(data.alerts[0].start, "X").utcOffset(data.timezone_offset / 60);
+			current.end = moment(data.alerts[0].end, "X").utcOffset(data.timezone_offset / 60);
+			current.alert = data.alerts[0].description;
+		}
+
+		return { current: current, hours: hours, days: days, alerts: alerts };
 	},
 
 	/*
@@ -479,11 +486,11 @@ WeatherProvider.register("openweathermap", {
 			if (this.config.type === "current") {
 				params += "&exclude=minutely,hourly,daily";
 			} else if (this.config.type === "hourly") {
-				params += "&exclude=current,minutely,daily";
+				params += "&exclude=current,minutely,daily,alerts";
 			} else if (this.config.type === "daily" || this.config.type === "forecast") {
-				params += "&exclude=current,minutely,hourly";
+				params += "&exclude=current,minutely,hourly,alerts";
 			} else {
-				params += "&exclude=minutely";
+				params += "&exclude=minutely,alerts";
 			}
 		} else if (this.config.lat && this.config.lon) {
 			params += "lat=" + this.config.lat + "&lon=" + this.config.lon;

@@ -3,6 +3,13 @@
         <div class="normal medium">
             <span class="wi wi-strong-wind cyan"></span>
             <span>
+                {% if config.showWindDirection %}                
+                    {% if config.showWindDirectionAsArrow %}
+                        <i class="wi wi-direction-down" style="transform:rotate{{ current.windDirection }}deg);"></i>
+                    {% else %}
+                        {{ current.cardinalWindDirection() | translate }}
+                    {% endif %}                
+                {% endif %}
                 {% if config.useBeaufort %}
                     {{ current.beaufortWindSpeed() | round }}
                 {% else %}
@@ -12,42 +19,32 @@
                         {{ current.windSpeed | round }}
                     {% endif %}
                 {% endif %}
-                {% if config.showWindDirection %}
-                    <sup>
-                        {% if config.showWindDirectionAsArrow %}
-                            <i class="wi wi-direction-down" style="transform:rotate{{ current.windDirection }}deg);"></i>
+                {% if config.showPressure and current.pressure %}
+                    <span><i class="wi wi-barometer gold"></i>{{ current.pressure | decimalSymbol }}</span><span class="subs"> Hg</span>
+                {% endif %}
+                {% if config.showVisibility and current.visibility %}
+                    <span><i class="fa fa-binoculars violet"></i>{{ current.visibility | decimalSymbol }}</span><span class="subs"> Km</span>
+                {% endif %}
+                {% if config.showHumidity and current.humidity %}
+                    <span><i class="wi wi-humidity skyblue"></i> {{ current.humidity | decimalSymbol }}%</span>
+                {% endif %}
+                {% if config.showSun %}
+                    <span class="wi dimmed wi-{{ current.nextSunAction() }} gold"></span>
+                    <span>
+                        {% if current.nextSunAction() === "sunset" %}
+                            {{ current.sunset | formatTime }}
                         {% else %}
-                            {{ current.cardinalWindDirection() | translate }}
+                            {{ current.sunrise | formatTime }}
                         {% endif %}
-                        &nbsp;
-                    </sup>
+                    </span>
                 {% endif %}
             </span>
-            {% if config.showHumidity and current.humidity %}
-                <span><i class="wi wi-humidity skyblue"></i>{{ current.humidity | decimalSymbol }}%&nbsp;</span>
-            {% endif %}
-            {% if config.showPressure and current.pressure %}
-                <span><i class="wi wi-barometer gold"></i>{{ current.pressure | decimalSymbol }}</span><span class="subs"> Hg</span>
-            {% endif %}
-            {% if config.showVisibility and current.visibility %}
-                <span><i class="fa fa-binoculars violet"></i>{{ current.visibility | decimalSymbol }}</span><span class="subs"> Km</span>
-            {% endif %}
-            {% if config.showSun %}
-                <span class="wi dimmed wi-{{ current.nextSunAction() }} gold"></span>
-                <span>
-                    {% if current.nextSunAction() === "sunset" %}
-                        {{ current.sunset | formatTime }}
-                    {% else %}
-                        {{ current.sunrise | formatTime }}
-                    {% endif %}
-                </span>
-            {% endif %}
         </div>
     {% endif %}
     <div class="xlarge light">
-        <span class="wi weathericon wi-{{current.weatherType}}"></span>
+        <span class="wi weathericon wi-{{current.weatherType}} wicon"></span>
         <span class="bright">
-            {{ current.temperature | roundValue | unit("temperature") | decimalSymbol }}
+            {{ current.temperature | roundValue | decimalSymbol }}&deg;
         </span>
     </div>
     <div class="normal light indoor">
@@ -68,42 +65,53 @@
             </div>
         {% endif %}
     </div>
-    {% if (config.showFeelsLike or config.showPrecipitationAmount) and not config.onlyTemp %}
-        <div class="normal medium feelslike">
-            {% if config.showFeelsLike %}
-                <div class="lime">
-                    {{ "FEELS" | translate({DEGREE: current.feelsLike() | unit("temperature") | decimalSymbol }) }}
-                    <i class="wi wi-thermometer gold"></i>
-                </div>
-            {% endif %}
-            {% if config.showPrecipitationAmount %}
-                <div class="normal midget">
-                    {{ "PRECIP" | translate }} {{ current.precipitation | unit("precip") }}
-                    <i class="fa fa-tint skyblue"></i>
-                </div>
-            {% endif %}
-        </div>
-    {% endif %}
-    {% if (config.showDewPoint or config.showUVindex) and not config.onlyTemp %}
-        <div class="normal medium dewpoint uvi">
-            {% if config.showDewPoint %}
-                <span class="normal midget lightskyblue">
-                    {{ "DEWPOINT" | translate({DEGREE: current.dewpoint | roundValue | unit("temperature") | decimalSymbol }) }}
-                    <i class="wi wi-raindrops lightgreen"></i>
-                </span>
-            {% endif %}
-            {% if config.showUVindex %}
-                <span class="normal midget greenyellow">&nbsp;
-                    {{ "UVI" | translate }} {{ current.uvindex | decimalSymbol }}
-                    <i class="wi wi-hot gold"></i>
-                </span>
-            {% endif %}
-            {% if config.showDescription %}
-                <div class="normal medium bright">
-                    {{ current.description }}
-                </div>
-            {% endif %}
-        </div>
+    {% if not config.onlyTemp %}
+        {% if config.showFeelsLike and current.feelsLike %}
+            <div class="medium feelslike lime">
+                {{ "FEELS" | translate({DEGREE: current.feelsLike() | unit("temperature") }) }}
+                <i class="wi wi-thermometer yellow"></i>
+            </div>
+        {% endif %}
+        {% if config.showDewPoint and current.dewpoint %}
+            <span class="normal dewpoint midget cyan">
+                {{ "DEWPOINT" | translate({DEGREE: current.dewpoint | roundValue | unit("temperature") | decimalSymbol }) }}
+                <i class="wi wi-raindrops lightgreen"></i>
+            </span>
+        {% endif %}
+        {% if config.showUVindex and current.uvindex %}
+            <span class="normal uvi midget lightgreen">&nbsp;
+                {{ "UVI" | translate }} <i class="wi wi-hot gold"></i> {{ current.uvindex | decimalSymbol }}
+                
+            </span>
+        {% endif %}
+        {% if config.showPrecipitationAmount %}
+            <div class="normal midget">
+                {% if current.precipitation %}
+                    {% if current.rain %}
+                        {{ "RAIN" | translate }}: {{ current.rain | roundValue | decimalSymbol | unit("precip") }}
+                        <i class="wi wi-umbrella lime"></i>
+                    {% elif current.snow %}
+                        {{ "SNOW" | translate }}: {{ current.snow | roundValue | decimalSymbol | unit("precip") }}
+                        <i class="wi wi-snowflake-cold lightblue"></i>
+                    {% elif current.rain and current.snow %}
+                        {{ "PRECIP" | translate }}: {{ current.precipitation | roundValue | decimalSymbol | unit("precip") }}
+                        <i class="wi wi-umbrella lime"></i>
+                    {% endif %}
+                {% else %}
+                    {{ "No prep" | translate }}&nbsp;<i class="medium fa fa-tint-slash skyblue"></i>
+                {% endif %}
+            </div>
+        {% endif %}
+        {% if config.showDescription and current.description %}
+            <div class="normal medium bright">
+                {{ current.description }}
+            </div>
+        {% endif %}
+        {% if config.showAlerts and current.alert %}
+            <div class="alerts midget coral"> <i class="wi wi-small-craft-advisory"></i> Alerta meteo
+                de la {{ current.start | formatTime }} la {{ current.end | formatTime }}<br>{{ current.alert }} 
+            </div>
+        {% endif %}
     {% endif %}
 {% else %}
     <div class="dimmed light small">

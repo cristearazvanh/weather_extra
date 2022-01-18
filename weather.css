@@ -1,6 +1,5 @@
 .weather .weathericon,
 .weather .fa-home {
-  font-size: 75%;
   line-height: 65px;
   display: inline-block;
   transform: translate(0, -3px);
@@ -15,23 +14,19 @@
 }
 
 .weather .day {
-  padding-left: 0;
-  padding-right: 25px;
+
 }
 
 .weather .weather-icon {
-
   text-align: center;
 }
 
 .weather .min-temp {
-  padding-left: 20px;
-  padding-right: 0;
+
 }
 
 .weather .precipitation {
-  padding-left: 20px;
-  padding-right: 0;
+
 }
 
 .weather tr .weathericon {
@@ -79,16 +74,10 @@
   padding-right: 3px;
 }
 
-.currentweather .weathericon {
+.currentweather .wicon {
   transform: translate(0, 20px);
   height: 70px;
-  float: left;
-}
-
-.currentweather .deg {
-  font-size: 50%;
-  font-weight: 400;
-  margin-left: -30px;
+  padding-right: 50px;
 }
 
 .currentweather .bright::first-letter {
@@ -222,33 +211,35 @@
   color: greenyellow;
 }
 
-.weather table td {
-  border: 0;
+.weatherforecast .day,
+.weatherforecast .humidity,
+.weatherforecast table tr td:nth-child(1) {
+  width: 20% !important;
 }
 
-.weather table tr td:nth-child(1) {
-  text-align: left;
-  width: 20%;
+.weatherforecast .weather-icon,
+.weatherforecast .dewPoint,
+.weatherforecast table tr td:nth-child(2) {
+  width: 15% !important;
 }
 
-.weather table tr td:nth-child(2) {
-    text-align: center;
-  width: 20%;
+.weatherforecast .max-temp,
+.weatherforecast .pressure,
+.weatherforecast table tr td:nth-child(3) {
+  width: 20% !important;
 }
 
-.weather table tr td:nth-child(3) {
-    text-align: center;
-  width: 20%;
+.weatherforecast .min-temp,
+.weatherforecast .uvIndex,
+.weatherforecast table tr td:nth-child(4) {
+  width: 20% !important;
 }
 
-.weather table tr td:nth-child(4) {
-    text-align: center;
-  width: 20%;
-}
-
-.weather table tr td:nth-child(5) {
-    text-align: right;
-  width: 20%;
+.weatherforecast .rain,
+.weatherforecast .visibility,
+.weatherforecast .realFeel,
+.weatherforecast table tr td:nth-child(5) {
+  width: 25% !important;
 }
 
 .weatherforecast .rain, .weatherforecast .snow {
@@ -356,4 +347,196 @@
 
 .grayscale {
    filter: grayscale(100%);
+}
+
+.transparent {
+  background: transparent;
+}
+
+.fade {
+  color: var(--color-text-fade);
+}
+
+.shade {
+  color: var(--color-text-shade);
+}
+
+.dimmed {
+  color: var(--color-text-dimmed);
+}
+
+.normal {
+  color: var(--color-text);
+}
+
+.bright {
+  color: var(--color-text-bright);
+}
+
+.little {
+  font-size: 80%;
+  transform: translate(0, -1px);
+}
+
+.xsmall {
+  font-size: 0.7rem;
+}
+
+.small {
+  font-size: 1rem;
+}
+
+.midget {
+  font-size: 1.2rem;
+}
+
+.medium {
+  font-size: 1.6rem;
+}
+
+.slarge {
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+.large {
+  font-size: 6rem;
+  line-height: 1;
+}
+
+.xlarge {
+  font-size: 7.4rem;
+  line-height: 1;
+  background: -webkit-linear-gradient(white, darkgray);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.thin {
+  font-family: var(--font-secondary);
+  font-weight: 100;
+}
+
+.light {
+  font-weight: 300;
+}
+
+.regular {
+  font-weight: 400;
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.darkred {
+  color: darkred;
+}
+
+.redrf {
+  color: red;
+}
+
+.orangered {
+  color: orangered;
+}
+
+.tomato {
+  color: tomato;
+}
+
+.coral {
+  color: coral;
+}
+
+.darkorange {
+  color: darkorange;
+}
+
+.orange {
+  color: orange;
+}
+
+.gold {
+  color: gold;
+}
+
+.yellow {
+  color: yellow;
+}
+
+.greenyellow {
+  color: greenyellow;
+}
+
+.chartreuse {
+  color: chartreuse;
+}
+
+.lawngreen {
+  color: lawngreen;
+}
+
+.lime {
+  color: lime;
+}
+
+.powderblue {
+  color: powderblue;
+}
+
+.lightblue {
+  color: lightblue;
+}
+
+.skyblue {
+  color: skyblue;
+}
+
+.lightskyblue {
+  color: lightskyblue;
+}
+
+.deepskyblue {
+  color: deepskyblue;
+}
+
+.dodgerblue {
+  color: dodgerblue;
+}
+
+.lightgreen {
+  color: lightgreen;
+}
+
+.cyan {
+  color: cyan;
+}
+
+.magenta {
+  color: magenta;
+}
+
+.olive {
+  color: olive;
+}
+
+.purple {
+  color: purple;
+}
+
+.violet {
+  color: violet;
 }

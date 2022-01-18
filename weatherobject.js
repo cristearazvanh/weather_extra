@@ -35,6 +35,9 @@ var WeatherObject = (function () {
         this.dewpoint = null;
         this.uvindex = null;
         this.description = null;
+        this.start = null;
+        this.end = null;
+        this.alert = null;
     }
     WeatherObject.prototype.cardinalWindDirection = function () {
         if (this.windDirection > 11.25 && this.windDirection <= 33.75) {

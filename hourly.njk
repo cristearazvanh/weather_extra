@@ -1,46 +1,53 @@
 {% if hourly %}
     {% set numSteps = hourly | calcNumEntries %}
     {% set currentStep = 0 %}
-    <table class="{{ config.tableClass }} hourly">
+    <table class="{{ config.tableClass }} hourly weatherforecast">
         {% set hours = hourly.slice(0, numSteps) %}
         {% for hour in hours %}
             <tr {% if config.colored %}class="colored"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
-                <td class="day">{{ hour.date | formatTime }}</td>
-                <td class="bright weather-icon"><span class="wi weathericon wi-{{ hour.weatherType }}"></span></td>
-                <td class="align-right normal day-temp lime">
+                <td class="align-left day">{{ hour.date | formatTime }}</td>
+                <td class="align-center bright weather-icon"><span class="wi weathericon wi-{{ hour.weatherType }}"></span></td>
+                <td class="align-center normal day-temp lime">
                     {{ hour.temperature | roundValue | unit("temperature") | decimalSymbol }}
                 </td>
-                <td class="align-right feeLike gold">
-                    {{ hour.feelsLikeTemp | roundValue | unit("temperature") | decimalSymbol }}
+                <td class="align-center feeLike yellow">
+                    {{ hour.feelsLikeTemp | unit("temperature") | decimalSymbol }}
                 </td>
                 {% if config.showPrecipitationAmount %}
-                    {% if hour.precipitationUnits %}	
+                    {% if hour.precipitation %}
                         <td class="align-right bright precipitation">
-                            {{ hour.precipitation }}{{ hour.precipitationUnits }}
-                        </td>			
-		    		{% else %}
-                        <td class="align-right bright precipitation">
-                            {{ hour.precipitation }} <i class="fa fa-tint prep skyblue"></i>
+                            {% if hour.rain %}
+                                {{ hour.rain | roundValue | decimalSymbol }} mm <i class="wi wi-umbrella lime"></i>
+                            {% elif hour.snow %}
+                                {{ hour.snow | roundValue | decimalSymbol }} mm <i class="wi wi-snowflake-cold lightblue"></i>
+                            {% elif hour.rain and hour.snow %}
+                                {{ hour.precipitation | roundValue | decimalSymbol }} mm <i class="wi wi-umbrella lime"></i>
+                            {% endif %}
+                        </td>
+                    {% else %}
+                        <td class="align-right rain precipitation">
+                            {{ "No rain" | translate }} <i class="fa fa-tint-slash skyblue"></i>
                         </td>
                     {% endif %}
                 {% endif %}
             </tr>
             {% if config.extra %}
-                <tr {% if config.colored %}class="colored"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
-                    <td class="align-right humidity skyblue">
-                        {{ hour.humidity | roundValue }}%
+                <tr class="extra" {% if config.colored %}class="colored"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
+                    <td class="align-left humidity skyblue">
+                        <i class="wi wi-humidity little skyblue"></i> {{ hour.humidity }}%
                     </td>
-                    <td class="align-right dewpoint cyan">
+                    <td class="align-center dewpoint cyan">
                         {{ hour.dew | roundValue | unit("temperature") | decimalSymbol }}
                     </td>
-                    <td class="align-right pressure gold">
-                        {{ hour.pressure }}Hg
+                    <td class="align-center pressure gold">
+                        {{ hour.pressure }} Hg
                     </td>
-                    <td class="align-right uvi lightgreen">uv
+                    <td class="align-center uvi lightgreen">uv
                         {{ hour.uvi | roundValue | decimalSymbol }}
                     </td>
                     <td class="align-right visibility violet">
-                        {{ hour.visibility | decimalSymbol }}Km
+                    <i class="fa fa-binoculars violet little"></i>
+                        {{ hour.visibility | decimalSymbol }} Km
                     </td>
                 </tr>
             {% endif %}

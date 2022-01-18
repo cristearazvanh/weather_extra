@@ -19,40 +19,42 @@ Module.register("weather", {
 		tempUnits: config.units,
 		windUnits: config.units,
 		updateInterval: 10 * 60 * 1000, // every 10 minutes
-		animationSpeed: 1000,
+		animationSpeed: config.animation,
 		timeFormat: config.timeFormat,
-		showPeriod: false,
-		showPeriodUpper: false,
+		showPeriod: config.period,
+		showPeriodUpper: config.period,
 		showWindDirection: true,
 		showWindDirectionAsArrow: true,
 		useBeaufort: false,
 		lang: config.language,
 		showSun: false,
 		degreeLabel: true,
-		decimalSymbol: ".",
+		decimalSymbol: config.decimal,
 		showIndoorTemperature: false,
 		showIndoorHumidity: false,
 		maxNumberOfDays: 5,
 		maxEntries: 5,
-        	ignoreToday: false,
+        ignoreToday: false,
 		fade: false,
 		fadePoint: 0.25, // Start on 1/4th of the list.
 		initialLoadDelay: 0, // 0 seconds delay
 		appendLocationNameToHeader: false,
-       		location: config.location,
+        location: config.location,
 		calendarClass: "calendar",
 		tableClass: "small",
 		onlyTemp: false,
 		showPrecipitationAmount: true,
 		colored: true,
-		showHumidity: true,
-		showFeelsLike: true,
-		showDewPoint: true,
-		showUVindex: true,
-		showPressure: true,
-		showVisibility: true,
-		showDescription: true,
-		absoluteDates: false
+        showHumidity: true,
+        showFeelsLike: true,
+        showDewPoint: true,
+        showUVindex: true,
+        showPressure: true,
+        showVisibility: true,
+        showDescription: true,
+        extra: false,
+        showAlerts: false,
+        absoluteDates: false
 	},
 
 	// Module properties.
@@ -147,7 +149,7 @@ Module.register("weather", {
     },
     // What to do when the weather provider has new information available?
     updateAvailable: function () {
-        Log.log("New weather information available.");
+        //Log.log("New weather information available.");
         this.updateDom(0);
         this.scheduleUpdate();
         if (this.weatherProvider.currentWeather()) {
