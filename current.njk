@@ -108,8 +108,8 @@
             </div>
         {% endif %}
         {% if config.showAlerts and current.alert %}
-            <div class="alerts midget coral"> <i class="wi wi-small-craft-advisory"></i> Alerta meteo
-                de la {{ current.start | formatTime }} la {{ current.end | formatTime }}<br>{{ current.alert }} 
+            <div class="alerts midget coral"> <i class="wi wi-small-craft-advisory"></i> {{ "ALERTS" | translate }}
+            {{ current.start | formatTime }} - {{ current.end | formatTime }}<br>{{ current.alert }} 
             </div>
         {% endif %}
     {% endif %}
