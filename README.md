@@ -41,8 +41,6 @@ plus
 - visibility
 - humidity
 
-#### Air Polution Index under construction
-
 		{
 			module: "weather",
 			position: "top_left",
@@ -84,18 +82,6 @@ plus
 				maxNumberOfDays: 8,
 				initialLoadDelay: 4000,
 				extra: true
-			}
-		},
-		{
-			module: "weather",
-			position: "top_left",
-			header: "Air polution in",
-			classes: "air polution day",
-			disabled: false,
-			config: {
-				apiKey: "",
-				type: "aqi",
-				initialLoadDelay: 6000,
 			}
 		},
 
