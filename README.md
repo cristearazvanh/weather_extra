@@ -1,6 +1,6 @@
 # MagicMirror² Weather Module with OpenWeatherMap OneCall enhancements and extra data
 
-Default Weather module (left/top on mobile) vs Onecall module (right/bottom on mobile) with same design https://github.com/hangorazvan/onecall
+Default Weather module (1st) vs Onecall module (2nd) with same design https://github.com/hangorazvan/onecall
 
 <img style="height:1000px" src=https://github.com/hangorazvan/weather/blob/master/weather.png> <img style="height:1000px" src=https://github.com/hangorazvan/weather/blob/master/onecall.png>
 
