@@ -108,8 +108,8 @@
             </div>
         {% endif %}
         {% if config.showAlerts and current.alert %}
-            <div class="alerts midget coral"> <i class="wi wi-small-craft-advisory"></i> {{ "ALERTS" | translate }}
-            {{ current.start | formatTime }} - {{ current.end | formatTime }}<br>{{ current.alert }} 
+            <div {% if not config.colored %}class="alerts midget grayscale"{% else %}class="alerts midget coral"{% endif %}> <i class="wi wi-small-craft-advisory"></i>
+            {{ "ALERTS" | translate }} {{ current.start | formatTime }} - {{ current.end | formatTime }}<br>{{ current.alert }} 
             </div>
         {% endif %}
     {% endif %}
