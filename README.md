@@ -2,7 +2,7 @@
 
 Default Weather module (left) vs Onecall module (right) with same design https://github.com/hangorazvan/onecall
 
-<img style="width:200px" src=https://github.com/hangorazvan/weather/blob/master/weather.png> <img style="width:200px" src=https://github.com/hangorazvan/weather/blob/master/onecall.png>
+<img style="width:400px" src=https://github.com/hangorazvan/weather/blob/master/weather.png> <img style="width:400px" src=https://github.com/hangorazvan/weather/blob/master/onecall.png>
 
 #### Current weather (onecall)
 
