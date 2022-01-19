@@ -86,6 +86,18 @@ plus
 				extra: true
 			}
 		},
+		{
+			module: "weather",
+			position: "top_left",
+			header: "Air polution in",
+			classes: "air polution day",
+			disabled: false,
+			config: {
+				apiKey: "",
+				type: "aqi",
+				initialLoadDelay: 6000,
+			}
+		},
 
 Weather compliments to put in your config.js
 
