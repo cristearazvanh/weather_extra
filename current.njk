@@ -80,7 +80,7 @@
         {% endif %}
         {% if config.showUVindex %}
             <span class="normal uvi midget lightgreen">&nbsp;
-                {{ "UVI" | translate }} <i class="wi wi-hot gold"></i> {{ current.uvindex | decimalSymbol }}
+                {{ "UVI" | translate }} <i class="wi wi-hot gold"></i> {{ current.uvindex | roundValue | decimalSymbol }}
                 
             </span>
         {% endif %}

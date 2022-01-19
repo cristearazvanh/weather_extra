@@ -230,14 +230,14 @@
 }
 
 .weatherforecast .min-temp,
-.weatherforecast .uvIndex,
+.weatherforecast .realFeel,
+.weatherforecast .visibility,
 .weatherforecast table tr td:nth-child(4) {
   width: 20% !important;
 }
 
 .weatherforecast .rain,
-.weatherforecast .visibility,
-.weatherforecast .realFeel,
+.weatherforecast .uvIndex,
 .weatherforecast table tr td:nth-child(5) {
   width: 25% !important;
 }

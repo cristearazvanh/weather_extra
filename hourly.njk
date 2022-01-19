@@ -42,12 +42,11 @@
                     <td class="align-center pressure gold">
                         {{ hour.pressure }} Hg
                     </td>
-                    <td class="align-center uvi lightgreen">uv
-                        {{ hour.uvi | roundValue | decimalSymbol }}
-                    </td>
-                    <td class="align-right visibility violet">
-                    <i class="fa fa-binoculars violet little"></i>
+                    <td class="align-center visibility violet">
                         {{ hour.visibility | decimalSymbol }} Km
+                    </td>
+                    <td class="align-right uvi lightgreen">UVI
+                        {{ hour.uvi | roundValue | decimalSymbol }}
                     </td>
                 </tr>
             {% endif %}

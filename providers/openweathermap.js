@@ -6,7 +6,8 @@
  * By Michael Teeuw https://michaelteeuw.nl
  * MIT Licensed.
  *
- * This class is the blueprint for a weather provider.
+ * Redesigned by Răzvan Cristea
+ * https://github.com/hangorazvan
  */
 WeatherProvider.register("openweathermap", {
 	// Set the name of the provider.
@@ -21,8 +22,8 @@ WeatherProvider.register("openweathermap", {
 		weatherEndpoint: "/onecall",
 		locationID: false,
 		location: false,
-		lat: config.latitude,
-		lon: config.longitude,
+		lat: "",
+		lon: "",
 		apiKey: ""
 	},
 

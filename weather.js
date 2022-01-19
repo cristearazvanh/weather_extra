@@ -5,46 +5,49 @@
  *
  * By Michael Teeuw https://michaelteeuw.nl
  * MIT Licensed.
+ *
+ * Redesigned by Răzvan Cristea
+ * https://github.com/hangorazvan
  */
 "use strict";
 
 Module.register("weather", {
-	// Default module config.
-	defaults: {
-		weatherProvider: "openweathermap",
-		roundTemp: false,
-		type: "current", // current, forecast, daily (equivalent to forecast), hourly (only with OpenWeatherMap /onecall endpoint)
-		units: config.units,
-		useKmh: true,
-		tempUnits: config.units,
-		windUnits: config.units,
-		updateInterval: 10 * 60 * 1000, // every 10 minutes
-		animationSpeed: config.animation,
-		timeFormat: config.timeFormat,
-		showPeriod: config.period,
-		showPeriodUpper: config.period,
-		showWindDirection: true,
-		showWindDirectionAsArrow: true,
-		useBeaufort: false,
-		lang: config.language,
-		showSun: false,
-		degreeLabel: true,
-		decimalSymbol: config.decimal,
-		showIndoorTemperature: false,
-		showIndoorHumidity: false,
-		maxNumberOfDays: 5,
-		maxEntries: 5,
+    // Default module config.
+    defaults: {
+        weatherProvider: "openweathermap",
+        roundTemp: false,
+        type: "current", // current, forecast, daily (equivalent to forecast), hourly (only with OpenWeatherMap /onecall endpoint)
+        units: config.units,
+        useKmh: true,
+        tempUnits: config.units,
+        windUnits: config.units,
+        updateInterval: 10 * 60 * 1000, // every 10 minutes
+        animationSpeed: 1000,
+        timeFormat: config.timeFormat,
+        showPeriod: false,
+        showPeriodUpper: false,
+        showWindDirection: true,
+        showWindDirectionAsArrow: true,
+        useBeaufort: false,
+        lang: config.language,
+        showSun: false,
+        degreeLabel: true,
+        decimalSymbol: ".",
+        showIndoorTemperature: false,
+        showIndoorHumidity: false,
+        maxNumberOfDays: 5,
+        maxEntries: 5,
         ignoreToday: false,
-		fade: false,
-		fadePoint: 0.25, // Start on 1/4th of the list.
-		initialLoadDelay: 0, // 0 seconds delay
-		appendLocationNameToHeader: false,
-        location: config.location,
-		calendarClass: "calendar",
-		tableClass: "small",
-		onlyTemp: false,
-		showPrecipitationAmount: true,
-		colored: true,
+        fade: false,
+        fadePoint: 0.25, // Start on 1/4th of the list.
+        initialLoadDelay: 0, // 0 seconds delay
+        appendLocationNameToHeader: false,
+        location: "",
+        calendarClass: "calendar",
+        tableClass: "small",
+        onlyTemp: false,
+        showPrecipitationAmount: true,
+        colored: true,
         showHumidity: true,
         showFeelsLike: true,
         showDewPoint: true,
@@ -55,28 +58,21 @@ Module.register("weather", {
         extra: false,
         showAlerts: false,
         absoluteDates: false
-	},
+    },
 
-	// Module properties.
-	weatherProvider: null,
+    // Module properties.
+    weatherProvider: null,
 
-	// Can be used by the provider to display location of event if nothing else is specified
-	firstEvent: null,
+    // Can be used by the provider to display location of event if nothing else is specified
+    firstEvent: null,
 
-	// Define required scripts.
+    // Define required scripts.
     getStyles: function () {
         return ["weather.css", "font-awesome.css", "weather-icons.css"];
     },
     // Return the scripts that are necessary for the weather module.
     getScripts: function () {
         return ["moment.js", "weatherprovider.js", "weatherobject.js", "suncalc.js", this.file("providers/" + this.config.weatherProvider.toLowerCase() + ".js")];
-    },
-    // Define required translations.
-    getTranslations: function () {
-        return {
-            en: "en.json",
-            ro: "ro.json"
-        };
     },
     // Override getHeader method.
     getHeader: function () {
@@ -87,6 +83,12 @@ Module.register("weather", {
                 return config.location; //this.weatherProvider.fetchedLocation();
         }
         return this.data.header ? this.data.header : "";
+    },
+    getTranslations: function () {
+        return {
+            en: "en.json",
+            ro: "ro.json"
+        };
     },
     start: function () {
         moment.locale(this.config.lang);
@@ -213,7 +215,7 @@ Module.register("weather", {
         this.nunjucksEnvironment().addFilter("unit", function (value, type) {
             if (type === "temperature") {
                 if (this.config.tempUnits === "metric" || this.config.tempUnits === "imperial") {
-                    value += "°";
+                    value += "째";
                 }
                 if (this.config.degreeLabel) {
                     if (this.config.tempUnits === "metric") {

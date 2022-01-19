@@ -51,11 +51,11 @@
                     <td class="align-center pressure gold">
                         {{ f.pressure }} Hg
                     </td>
-                    <td class="align-center uvi lightgreen">uv
-                        {{ f.uvi | roundValue | decimalSymbol }}
+                    <td class="align-center feeLike yellow">
+                        {{ f.feelsLikeTemp | unit("temperature") | decimalSymbol }}
                     </td>
-                    <td class="align-right feeLike yellow">
-                        Realfeel {{ f.feelsLikeTemp | unit("temperature") | decimalSymbol }}
+                    <td class="align-right uvi lightgreen"> UVI
+                        {{ f.uvi | roundValue | decimalSymbol }}
                     </td>
                 </tr>
             {% endif %}
