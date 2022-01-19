@@ -41,6 +41,8 @@ plus
 - visibility
 - humidity
 
+#### Air Polution Index under construction
+
 		{
 			module: "weather",
 			position: "top_left",
