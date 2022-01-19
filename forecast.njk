@@ -7,7 +7,7 @@
         {% endif %}
         {% set forecast = forecast.slice(0, numSteps) %}
         {% for f in forecast %}
-            <tr {% if config.colored %}class="colored"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
+            <tr {% if not config.colored %}class="grayscale"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
                 {% if (currentStep == 0) and config.ignoreToday == false and config.absoluteDates == false %}
                     <td class="align-left day">{{ "TODAY" | translate }}</td>
                 {% elif (currentStep == 1) and config.ignoreToday == false and config.absoluteDates == false and not config.extra %}
@@ -41,8 +41,8 @@
                 {% endif %}
             </tr>
             {% if config.extra %}
-                <tr class="extra" {% if config.colored %}class="colored"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
-                    <td class="align-left humidity skyblue">
+                <tr {% if not config.colored %}class="grayscale"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
+                    <td class="align-left humidity">
                         <i class="wi wi-humidity little skyblue"></i> {{ f.humidity }}%
                     </td>
                     <td class="align-center dewpoint cyan">

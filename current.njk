@@ -1,8 +1,8 @@
 {% if current %}
     {% if not config.onlyTemp %}
-        <div class="normal medium">
-            <span class="wi wi-strong-wind cyan"></span>
+        <div {% if not config.colored %}class="normal medium grayscale"{% else %}class="normal medium"{% endif %}>
             <span>
+                <i class="wi wi-strong-wind cyan"></i>
                 {% if config.showWindDirection %}                
                     {% if config.showWindDirectionAsArrow %}
                         <i class="wi wi-direction-down" style="transform:rotate{{ current.windDirection }}deg);"></i>
@@ -41,7 +41,7 @@
             </span>
         </div>
     {% endif %}
-    <div class="xlarge light">
+    <div {% if not config.colored %}class="xlarge light grayscale"{% else %}class="xlarge light"{% endif %}>
         <span class="wi weathericon wi-{{current.weatherType}} wicon"></span>
         <span class="bright">
             {{ current.temperature | roundValue | decimalSymbol }}&deg;
@@ -67,25 +67,25 @@
     </div>
     {% if not config.onlyTemp %}
         {% if config.showFeelsLike and current.feelsLike %}
-            <div class="medium feelslike lime">
+            <div {% if not config.colored %}class="medium feelslike grayscale"{% else %}class="medium feelslike lime"{% endif %}>
                 {{ "FEELS" | translate({DEGREE: current.feelsLike() | unit("temperature") }) }}
                 <i class="wi wi-thermometer yellow"></i>
             </div>
         {% endif %}
         {% if config.showDewPoint and current.dewpoint %}
-            <span class="normal dewpoint midget cyan">
+            <span {% if not config.colored %}class="normal dewpoint midget grayscale"{% else %}class="normal dewpoint midget cyan"{% endif %}>
                 {{ "DEWPOINT" | translate({DEGREE: current.dewpoint | roundValue | unit("temperature") | decimalSymbol }) }}
                 <i class="wi wi-raindrops lightgreen"></i>
             </span>
         {% endif %}
         {% if config.showUVindex %}
-            <span class="normal uvi midget lightgreen">&nbsp;
+            <span {% if not config.colored %}class="normal uvi midget grayscale"{% else %}class="normal uvi midget lightgreen"{% endif %}>&nbsp;
                 {{ "UVI" | translate }} <i class="wi wi-hot gold"></i> {{ current.uvindex | roundValue | decimalSymbol }}
                 
             </span>
         {% endif %}
         {% if config.showPrecipitationAmount %}
-            <div class="normal midget">
+            <div {% if not config.colored %}class="normal midget grayscale"{% else %}class="normal midget"{% endif %}>
                 {% if current.precipitation %}
                     {% if current.rain %}
                         {{ "RAIN" | translate }}: {{ current.rain | roundValue | decimalSymbol | unit("precip") }}
