@@ -9,9 +9,9 @@
         {% for f in forecast %}
             <tr {% if not config.colored %}class="grayscale"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
                 {% if (currentStep == 0) and config.ignoreToday == false and config.absoluteDates == false %}
-                    <td class="align-left day">{{ "TODAY" | translate }}</td>
+                    <td class="align-left day lime">{{ "TODAY" | translate }}</td>
                 {% elif (currentStep == 1) and config.ignoreToday == false and config.absoluteDates == false and not config.extra %}
-                    <td class="align-left day">{{ "TOMORROW" | translate }}</td>
+                    <td class="align-left day greenyellow">{{ "TOMORROW" | translate }}</td>
                 {% else %}
                     <td class="align-left day">{{ f.date.format('ddd') }}</td>
                 {% endif %}
