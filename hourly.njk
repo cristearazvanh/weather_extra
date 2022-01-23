@@ -32,7 +32,7 @@
                 {% endif %}
             </tr>
             {% if config.extra %}
-                <tr class="grayscale extra" {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
+                <tr class="extra" {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
                     <td class="align-left humidity">
                         <i class="wi wi-humidity little skyblue"></i> {{ hour.humidity }}%
                     </td>
