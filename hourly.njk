@@ -1,10 +1,10 @@
 {% if hourly %}
     {% set numSteps = hourly | calcNumEntries %}
     {% set currentStep = 0 %}
-    <table class="{{ config.tableClass }} hourly weatherforecast">
+    <table {% if not config.colored %}class="{{ config.tableClass }} hourly weatherforecast grayscale"{% else %}class="{{ config.tableClass }} hourly weatherforecast"{% endif %}>
         {% set hours = hourly.slice(0, numSteps) %}
         {% for hour in hours %}
-            <tr {% if not config.colored %}class="grayscale"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
+            <tr {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
                 <td class="align-left day">{{ hour.date | formatTime }}</td>
                 <td class="align-center bright weather-icon"><span class="wi weathericon wi-{{ hour.weatherType }}"></span></td>
                 <td class="align-center normal day-temp lime">
@@ -32,7 +32,7 @@
                 {% endif %}
             </tr>
             {% if config.extra %}
-                <tr {% if not config.colored %}class="grayscale"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
+                <tr class="grayscale extra" {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
                     <td class="align-left humidity">
                         <i class="wi wi-humidity little skyblue"></i> {{ hour.humidity }}%
                     </td>

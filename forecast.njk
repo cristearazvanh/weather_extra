@@ -1,13 +1,13 @@
 {% if forecast %}
     {% set numSteps = forecast | calcNumSteps %}
     {% set currentStep = 0 %}
-    <table class="{{ config.tableClass }} daily weatherforecast">
+    <table {% if not config.colored %}class="{{ config.tableClass }} daily weatherforecast grayscale"{% else %}class="{{ config.tableClass }} daily weatherforecast"{% endif %}>
         {% if config.ignoreToday %}
             {% set forecast = forecast.splice(1) %}
         {% endif %}
         {% set forecast = forecast.slice(0, numSteps) %}
         {% for f in forecast %}
-            <tr {% if not config.colored %}class="grayscale"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
+            <tr {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
                 {% if (currentStep == 0) and config.ignoreToday == false and config.absoluteDates == false %}
                     <td class="align-left day lime">{{ "TODAY" | translate }}</td>
                 {% elif (currentStep == 1) and config.ignoreToday == false and config.absoluteDates == false and not config.extra %}
@@ -41,7 +41,7 @@
                 {% endif %}
             </tr>
             {% if config.extra %}
-                <tr {% if not config.colored %}class="grayscale"{% endif %} {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
+                <tr class="extra" {% if config.fade %}style="opacity: {{ currentStep | opacity(numSteps) }};"{% endif %}>
                     <td class="align-left humidity">
                         <i class="wi wi-humidity little skyblue"></i> {{ f.humidity }}%
                     </td>

@@ -1,6 +1,7 @@
 {% if current %}
+    <div {% if not config.colored %}class="grayscale"{% endif %}>
     {% if not config.onlyTemp %}
-        <div {% if not config.colored %}class="normal medium grayscale"{% else %}class="normal medium"{% endif %}>
+        <div class="normal medium">
             <span>
                 <i class="wi wi-strong-wind cyan"></i>
                 {% if config.showWindDirection %}                
@@ -41,7 +42,7 @@
             </span>
         </div>
     {% endif %}
-    <div {% if not config.colored %}class="xlarge light grayscale"{% else %}class="xlarge light"{% endif %}>
+    <div class="xlarge light">
         <span class="wi weathericon wi-{{current.weatherType}} wicon"></span>
         <span class="bright">
             {{ current.temperature | roundValue | decimalSymbol }}&deg;
@@ -67,25 +68,25 @@
     </div>
     {% if not config.onlyTemp %}
         {% if config.showFeelsLike and current.feelsLike %}
-            <div {% if not config.colored %}class="medium feelslike grayscale"{% else %}class="medium feelslike lime"{% endif %}>
+            <div class="medium feelslike lime">
                 {{ "FEELS" | translate({DEGREE: current.feelsLike() | unit("temperature") }) }}
                 <i class="wi wi-thermometer yellow"></i>
             </div>
         {% endif %}
         {% if config.showDewPoint and current.dewpoint %}
-            <span {% if not config.colored %}class="normal dewpoint midget grayscale"{% else %}class="normal dewpoint midget cyan"{% endif %}>
+            <span class="normal dewpoint midget cyan">
                 {{ "DEWPOINT" | translate({DEGREE: current.dewpoint | roundValue | unit("temperature") | decimalSymbol }) }}
                 <i class="wi wi-raindrops lightgreen"></i>
             </span>
         {% endif %}
         {% if config.showUVindex %}
-            <span {% if not config.colored %}class="normal uvi midget grayscale"{% else %}class="normal uvi midget lightgreen"{% endif %}>&nbsp;
+            <span class="normal uvi midget lightgreen>&nbsp;
                 {{ "UVI" | translate }} <i class="wi wi-hot gold"></i> {{ current.uvindex | roundValue | decimalSymbol }}
                 
             </span>
         {% endif %}
         {% if config.showPrecipitationAmount %}
-            <div {% if not config.colored %}class="normal midget grayscale"{% else %}class="normal midget"{% endif %}>
+            <div class="normal midget">
                 {% if current.precipitation %}
                     {% if current.rain %}
                         {{ "RAIN" | translate }}: {{ current.rain | roundValue | decimalSymbol | unit("precip") }}
@@ -108,11 +109,12 @@
             </div>
         {% endif %}
         {% if config.showAlerts and current.alert %}
-            <div {% if not config.colored %}class="alerts midget grayscale"{% else %}class="alerts midget coral"{% endif %}> <i class="wi wi-small-craft-advisory"></i>
+            <div class="alerts midget coral" <i class="wi wi-small-craft-advisory"></i>
             {{ "ALERTS" | translate }} {{ current.start | formatTime }} - {{ current.end | formatTime }}<br>{{ current.alert }} 
             </div>
         {% endif %}
     {% endif %}
+    </div>
 {% else %}
     <div class="dimmed light small">
         {{ "LOADING" | translate }}
