@@ -19,7 +19,7 @@ Default Weather module (1st) vs Onecall module (2nd) with same design https://gi
 				showAlerts: true
 			}
 		},
-		
+
 #### Weather forecast (hourly onecall)
 
 		{
@@ -37,7 +37,7 @@ Default Weather module (1st) vs Onecall module (2nd) with same design https://gi
 				extra: false
 			}
 		},
-		
+	
 #### Weather forecast (daily onecall)
 
 		{
@@ -55,6 +55,8 @@ Default Weather module (1st) vs Onecall module (2nd) with same design https://gi
 				extra: true
 			}
 		},
+
+#### Can be used with Openweathermap Air Pollution https://github.com/hangorazvan/onecall
 
 Weather compliments to put in your config.js
 
