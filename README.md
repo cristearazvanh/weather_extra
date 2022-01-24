@@ -56,9 +56,9 @@ Default Weather module (1st) vs Onecall module (2nd) with same design https://gi
 			}
 		},
 
-#### Can be used with Openweathermap Air Pollution https://github.com/hangorazvan/onecall
+#### Can be used with Openweathermap Air Pollution https://github.com/hangorazvan/pollution
 
-Weather compliments to put in your config.js
+#### Weather compliments to put in your config.js
 
 	compliments: {			
 		day_sunny : [
@@ -114,7 +114,7 @@ Weather compliments to put in your config.js
 		],
 	}
 
-To put in your custom.css
+#### To put in your custom.css
 
 		.compliments .wi {
 			display: inline-block;
