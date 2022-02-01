@@ -215,7 +215,7 @@ Module.register("weather", {
         this.nunjucksEnvironment().addFilter("unit", function (value, type) {
             if (type === "temperature") {
                 if (this.config.tempUnits === "metric" || this.config.tempUnits === "imperial") {
-                    value += "째";
+                    value += "°";
                 }
                 if (this.config.degreeLabel) {
                     if (this.config.tempUnits === "metric") {
