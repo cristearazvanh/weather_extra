@@ -45,7 +45,7 @@
     <div class="xlarge light">
         <span class="wi weathericon wi-{{current.weatherType}} wicon"></span>
         <span class="bright">
-            {{ current.temperature | roundValue | decimalSymbol }}&deg;
+            {{ current.temperature | roundValue | unit("temperature") | decimalSymbol }}
         </span>
     </div>
     <div class="normal light indoor">
