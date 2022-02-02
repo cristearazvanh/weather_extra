@@ -79,10 +79,9 @@
                 <i class="wi wi-raindrops lightgreen"></i>
             </span>
         {% endif %}
-        {% if config.showUVindex %}
-            <span class="normal uvi midget lightgreen>&nbsp;
+        {% if config.showUVindex and current.uvindex %}
+            <span class="normal uvi midget lightgreen visible">&nbsp;
                 {{ "UVI" | translate }} <i class="wi wi-hot gold"></i> {{ current.uvindex | roundValue | decimalSymbol }}
-                
             </span>
         {% endif %}
         {% if config.showPrecipitationAmount %}
