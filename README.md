@@ -87,8 +87,6 @@ plus
 
 Weather compliments to put in your config.js
 
-You need to use my compliments_plus to work with AQI compliments https://github.com/hangorazvan/compliments_plus
-
 			compliments: {			
 					day_sunny : [
 						"<i class=\"gold wi wi-day-sunny\"></i> Sunny",
