@@ -1,5 +1,8 @@
 # MagicMirror² Weather Module with OpenWeatherMap OneCall enhancements and extra data
 
+[![Platform](https://img.shields.io/badge/platform-MagicMirror-informational)](https://MagicMirror.builders)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://raw.githubusercontent.com/hangorazvan/MagicMirror2/master/LICENSE)
+
 Weather_extra module (left) vs Onecall module (right) with same design https://github.com/hangorazvan/onecall
 
 <img style="height:1000px" src=https://github.com/hangorazvan/weather_extra/blob/master/weather.png> <img style="height:1000px" src=https://github.com/hangorazvan/weather_extra/blob/master/onecall.png>
