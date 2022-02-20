@@ -2,7 +2,7 @@
 
 Weather_extra module (left) vs Onecall module (right) with same design https://github.com/hangorazvan/onecall
 
-<img style="height:1000px" src=https://github.com/hangorazvan/weather/blob/master/weather.png> <img style="height:1000px" src=https://github.com/hangorazvan/weather/blob/master/onecall.png>
+<img style="height:1000px" src=https://github.com/hangorazvan/weather_extra/blob/master/weather.png> <img style="height:1000px" src=https://github.com/hangorazvan/weather_extra/blob/master/onecall.png>
 
 #### Current weather (onecall)
 
@@ -42,7 +42,7 @@ plus
 - humidity
 
 		{
-			module: "weather",
+			module: "weather_extra",
 			position: "top_left",
 			header: "Current weather in",
 			classes: "night currentweather current",
@@ -55,7 +55,7 @@ plus
 			}
 		},
 		{
-			module: "weather",
+			module: "weather_extra",
 			position: "top_left",
 			header: "Hourly forecast in",
 			classes: "hourly weatherforecast forecast day",
@@ -70,7 +70,7 @@ plus
 			}
 		},
 		{
-			module: "weather",
+			module: "weather_extra",
 			position: "top_left",
 			header: "Daily forecast in",
 			classes: "daily weatherforecast forecast day",
