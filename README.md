@@ -92,6 +92,7 @@ plus
 		},
 
 Weather compliments to put in your config.js
+You need to use my compliments_plus to work with weather compliments https://github.com/hangorazvan/compliments_plus
 
 			compliments: {			
 					day_sunny : [
