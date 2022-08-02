@@ -1,14 +1,14 @@
 # MagicMirror² Weather Module with OpenWeatherMap OneCall enhancements and extra data
 
-[![Platform](https://img.shields.io/badge/platform-MagicMirror2-informational)](https://github.com/hangorazvan/MagicMirror2)
+[![Platform](https://img.shields.io/badge/platform-MagicMirror2-informational)](https://github.com/cristearazvanh/MagicMirror2)
 [![CC-0 license](https://img.shields.io/badge/License-CC--4.0-blue.svg)](https://creativecommons.org/licenses/by-nd/4.0)
-[![GitHub branches](https://badgen.net/github/branches/hangorazvan/weather_extra)](https://github.com/hangorazvan/weather_extra)
-[![GitHub forks](https://badgen.net/github/forks/hangorazvan/weather_extra)](https://github.com/hangorazvan/weather_extra)
-[![GitHub stars](https://badgen.net/github/stars/hangorazvan/weather_extra)](https://github.com/hangorazvan/weather_extra)
+[![GitHub branches](https://badgen.net/github/branches/cristearazvanh/weather_extra)](https://github.com/cristearazvanh/weather_extra)
+[![GitHub forks](https://badgen.net/github/forks/cristearazvanh/weather_extra)](https://github.com/cristearazvanh/weather_extra)
+[![GitHub stars](https://badgen.net/github/stars/cristearazvanh/weather_extra)](https://github.com/cristearazvanh/weather_extra)
 
-Weather_extra module (left) vs Onecall module (right) with same design https://github.com/hangorazvan/onecall
+Weather_extra module (left) vs Onecall module (right) with same design https://github.com/cristearazvanh/onecall
 
-<img style="height:1000px" src=https://github.com/hangorazvan/weather_extra/blob/master/weather.png> <img style="height:1000px" src=https://github.com/hangorazvan/weather_extra/blob/master/onecall.png>
+<img style="height:1000px" src=https://github.com/cristearazvanh/weather_extra/blob/master/weather.png> <img style="height:1000px" src=https://github.com/cristearazvanh/weather_extra/blob/master/onecall.png>
 
 #### Current weather (onecall)
 
@@ -92,7 +92,7 @@ plus
 		},
 
 Weather compliments to put in your config.js
-You need to use my compliments_plus to work with weather compliments https://github.com/hangorazvan/compliments_plus
+You need to use my compliments_plus to work with weather compliments https://github.com/cristearazvanh/compliments_plus
 
 			compliments: {			
 					day_sunny : [
@@ -149,5 +149,5 @@ You need to use my compliments_plus to work with weather compliments https://git
 			}
 
 Redesigned by Răzvan Cristea
-https://github.com/hangorazvan
+https://github.com/cristearazvanh
 Creative Commons BY-NC-SA 4.0, Romania.
